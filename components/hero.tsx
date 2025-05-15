@@ -149,7 +149,8 @@ export const Hero = () => {
             <p className="text-base md:text-lg text-gray-400 mt-4">
               I help startups and product teams turn ideas into real, high-performance applications built with clean architecture and designed to grow.
             </p>
-            <div className="mt-8 flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+            {/* Desktop version of buttons/socials */}
+            <div className="mt-8 hidden md:flex flex-row items-center gap-6">
               <MagicButton
                 title="Download CV"
                 icon={<FaLocationArrow className="ml-2" />}
@@ -158,7 +159,7 @@ export const Hero = () => {
                 otherClasses="border-none bg-[#0B0B14] px-6 py-3 text-white hover:bg-purple-500/10 !mt-0"
                 handleClick={handleDownload}
               />
-              <div className="flex items-center md:space-x-6 space-x-12 md:pt-0 pt-2">
+              <div className="flex items-center space-x-6">
                 {socialMedia.map((social, index) => (
                   <Link
                     key={index}
@@ -290,6 +291,36 @@ export const Hero = () => {
                   </div>
                 )}
               </div>
+            </div>
+          </div>
+
+          {/* Mobile version of buttons/socials */}
+          <div className="flex md:hidden flex-col items-center gap-4 mt-0 order-3">
+            <MagicButton
+              title="Download CV"
+              icon={<FaLocationArrow className="ml-2" />}
+              position="right"
+              asChild
+              otherClasses="border-none bg-[#0B0B14] px-6 py-3 text-white hover:bg-purple-500/10 !mt-0"
+              handleClick={handleDownload}
+            />
+            <div className="flex items-center space-x-12">
+              {socialMedia.map((social, index) => (
+                <Link
+                  key={index}
+                  href={social.link}
+                  target="_blank"
+                  className="text-2xl text-gray-500 transition-colors hover:text-white"
+                >
+                  <Image
+                    src={social.img}
+                    alt={social.name}
+                    className={`w-6 h-6 inline transition-opacity opacity-50 hover:opacity-100`}
+                    width={24}
+                    height={24}
+                  />
+                </Link>
+              ))}
             </div>
           </div>
         </div>

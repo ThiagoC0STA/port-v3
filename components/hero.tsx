@@ -148,118 +148,6 @@ export const Hero = () => {
               </h1>
             </div>
 
-            {/* Video in mobile view */}
-            <div className="md:hidden">
-              <div 
-                ref={containerRef}
-                className="group relative aspect-square w-full overflow-hidden rounded-3xl border-2 border-[#0B0B14]/20"
-                onMouseEnter={() => setIsHovering(true)}
-                onMouseLeave={() => {
-                  setIsHovering(false);
-                  setIsAdjustingVolume(false);
-                }}
-              >
-                <video
-                  ref={videoRef}
-                  src="/u1.mp4"
-                  playsInline
-                  className="h-full w-full object-cover opacity-90"
-                  onTimeUpdate={handleTimeUpdate}
-                  onLoadedMetadata={handleLoadedMetadata}
-                />
-                {/* Initial Play Button */}
-                {!hasStartedPlaying && (
-                  <button
-                    onClick={togglePlay}
-                    className="absolute left-1/2 top-[54%] z-20 -translate-x-1/2 -translate-y-1/2 transform"
-                  >
-                    <div className="group relative">
-                      <div className="relative flex h-20 w-20 items-center justify-center rounded-full bg-[#0B0B14]/50 backdrop-blur-sm transition-all duration-300 group-hover:scale-110">
-                        <FaPlay className="ml-1 text-2xl text-white transition-transform duration-300 group-hover:scale-110" />
-                      </div>
-                    </div>
-                  </button>
-                )}
-                {/* Video Controls */}
-                {hasStartedPlaying && (
-                  <div 
-                    className={cn(
-                      "absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-[#0B0B14]/90 via-[#0B0B14]/50 to-transparent pb-4 pt-12 transition-all duration-500",
-                      isHovering ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-                    )}
-                  >
-                    {/* Progress bar */}
-                    <div className="px-4">
-                      <div 
-                        className="group relative h-1 cursor-pointer overflow-hidden rounded-full bg-white/10"
-                        onClick={handleProgressClick}
-                      >
-                        <div 
-                          className="absolute inset-0 flex items-center"
-                          style={{ width: `${progress}%` }}
-                        >
-                          <div className="h-full w-full bg-gradient-to-r from-[#0B0B14] to-[#1a1a2e]" />
-                          <div className="absolute right-0 h-3 w-3 -translate-x-1/2 -mr-2 rounded-full bg-white-200 opacity-0 transition-opacity group-hover:opacity-100" />
-                        </div>
-                      </div>
-                      
-                      {/* Time display */}
-                      <div className="mt-2 flex items-center justify-between text-xs text-white/60">
-                        <span>{formatTime(currentTime)}</span>
-                        <span>{formatTime(duration)}</span>
-                      </div>
-                    </div>
-
-                    {/* Controls */}
-                    <div className="flex items-center justify-between px-4 pt-2">
-                      <div className="flex items-center gap-4">
-                        <button
-                          onClick={togglePlay}
-                          className="group flex h-10 w-10 items-center justify-center rounded-full bg-[#0B0B14]/40 backdrop-blur-sm transition-all duration-300 hover:bg-[#0B0B14]/60"
-                        >
-                          {isPlaying ? (
-                            <FaPause className="text-lg text-white/80 transition-transform duration-300 group-hover:scale-110" />
-                          ) : (
-                            <FaPlay className="ml-0.5 text-lg text-white/80 transition-transform duration-300 group-hover:scale-110" />
-                          )}
-                        </button>
-
-                        {/* Volume Control */}
-                        <div className="group relative">
-                          <button
-                            onClick={toggleMute}
-                            onMouseEnter={() => setIsAdjustingVolume(true)}
-                            className="group flex h-10 w-10 items-center justify-center rounded-full bg-[#0B0B14]/40 backdrop-blur-sm transition-all duration-300 hover:bg-[#0B0B14]/60"
-                          >
-                            {isMuted ? (
-                              <FaVolumeMute className="text-lg text-white/80 transition-transform duration-300 group-hover:scale-110" />
-                            ) : (
-                              <FaVolumeUp className="text-lg text-white/80 transition-transform duration-300 group-hover:scale-110" />
-                            )}
-                          </button>
-
-                          {/* Volume Slider */}
-                          {isAdjustingVolume && (
-                            <div 
-                              ref={volumeBarRef}
-                              className="absolute bottom-full left-1/2 mb-2 h-24 w-1.5 -translate-x-1/2 cursor-pointer rounded-full bg-white/10"
-                              onClick={handleVolumeChange}
-                              onMouseLeave={() => setIsAdjustingVolume(false)}
-                            >
-                              <div 
-                                className="absolute bottom-0 left-0 right-0 rounded-full bg-gradient-to-t from-[#0B0B14] to-[#1a1a2e] transition-all"
-                                style={{ height: `${volume * 100}%` }}
-                              />
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-
             <p className="text-base md:text-lg text-gray-400">
             I help startups and product teams turn ideas into real, high-performance applications built with clean architecture and designed to grow.
             </p>
@@ -295,10 +183,10 @@ export const Hero = () => {
             </div>
           </div>
 
-          {/* Right Column - Video (Desktop only) */}
-          <div 
+          {/* ÚNICO vídeo responsivo */}
+          <div
             ref={containerRef}
-            className="hidden md:block group relative aspect-square w-full overflow-hidden rounded-3xl lg:justify-self-end border-2 border-[#0B0B14]/20 md:flex-[5]"
+            className="group relative aspect-square w-full overflow-hidden rounded-3xl border-2 border-[#0B0B14]/20 md:flex-[5] md:justify-self-end"
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => {
               setIsHovering(false);
@@ -309,7 +197,11 @@ export const Hero = () => {
               ref={videoRef}
               src="/u1.mp4"
               playsInline
-              className="h-full w-full object-cover opacity-80  "
+              muted
+              autoPlay
+              loop
+              preload="auto"
+              className="h-full w-full object-cover opacity-90"
               onTimeUpdate={handleTimeUpdate}
               onLoadedMetadata={handleLoadedMetadata}
             />
@@ -321,8 +213,6 @@ export const Hero = () => {
                 className="absolute left-1/2 top-[54%] z-20 -translate-x-1/2 -translate-y-1/2 transform"
               >
                 <div className="group relative">
-                 
-                  {/* Button content */}
                   <div className="relative flex h-20 w-20 items-center justify-center rounded-full bg-[#0B0B14]/50 backdrop-blur-sm transition-all duration-300 group-hover:scale-110">
                     <FaPlay className="ml-1 text-2xl text-white transition-transform duration-300 group-hover:scale-110" />
                   </div>
@@ -332,7 +222,7 @@ export const Hero = () => {
 
             {/* Video Controls */}
             {hasStartedPlaying && (
-              <div 
+              <div
                 className={cn(
                   "absolute bottom-0 left-0 right-0 z-20 bg-gradient-to-t from-[#0B0B14]/90 via-[#0B0B14]/50 to-transparent pb-4 pt-12 transition-all duration-500",
                   isHovering ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
@@ -340,11 +230,11 @@ export const Hero = () => {
               >
                 {/* Progress bar */}
                 <div className="px-4">
-                  <div 
+                  <div
                     className="group relative h-1 cursor-pointer overflow-hidden rounded-full bg-white/10"
                     onClick={handleProgressClick}
                   >
-                    <div 
+                    <div
                       className="absolute inset-0 flex items-center"
                       style={{ width: `${progress}%` }}
                     >
@@ -352,14 +242,12 @@ export const Hero = () => {
                       <div className="absolute right-0 h-3 w-3 -translate-x-1/2 -mr-2 rounded-full bg-white-200 opacity-0 transition-opacity group-hover:opacity-100" />
                     </div>
                   </div>
-                  
                   {/* Time display */}
                   <div className="mt-2 flex items-center justify-between text-xs text-white/60">
                     <span>{formatTime(currentTime)}</span>
                     <span>{formatTime(duration)}</span>
                   </div>
                 </div>
-
                 {/* Controls */}
                 <div className="flex items-center justify-between px-4 pt-2">
                   <div className="flex items-center gap-4">
@@ -373,7 +261,6 @@ export const Hero = () => {
                         <FaPlay className="ml-0.5 text-lg text-white/80 transition-transform duration-300 group-hover:scale-110" />
                       )}
                     </button>
-
                     {/* Volume Control */}
                     <div className="group relative">
                       <button
@@ -387,16 +274,15 @@ export const Hero = () => {
                           <FaVolumeUp className="text-lg text-white/80 transition-transform duration-300 group-hover:scale-110" />
                         )}
                       </button>
-
                       {/* Volume Slider */}
                       {isAdjustingVolume && (
-                        <div 
+                        <div
                           ref={volumeBarRef}
                           className="absolute bottom-full left-1/2 mb-2 h-24 w-1.5 -translate-x-1/2 cursor-pointer rounded-full bg-white/10"
                           onClick={handleVolumeChange}
                           onMouseLeave={() => setIsAdjustingVolume(false)}
                         >
-                          <div 
+                          <div
                             className="absolute bottom-0 left-0 right-0 rounded-full bg-gradient-to-t from-[#0B0B14] to-[#1a1a2e] transition-all"
                             style={{ height: `${volume * 100}%` }}
                           />

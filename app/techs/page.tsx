@@ -23,8 +23,6 @@ export default function TechsPage() {
 
       <div className="absolute inset-0 bg-grid-white/[0.02]" />
 
-
-
       <div className="w-full max-w-6xl mx-auto flex flex-col gap-8">
         <div className="w-full flex justify-start px-1 -mt-2 md:mt-4 relative z-50">
           <Link
@@ -36,8 +34,13 @@ export default function TechsPage() {
           </Link>
         </div>
         <div className="flex flex-col items-center gap-2">
-          <h1 className="text-3xl md:text-4xl font-extrabold text-white text-center">All Technologies</h1>
-          <p className="text-gray-400 text-center max-w-2xl">A complete list of all frontend and fullstack technologies used in my projects. Click any card to see the official documentation.</p>
+          <h1 className="text-3xl md:text-4xl font-extrabold text-white text-center">
+            All Technologies
+          </h1>
+          <p className="text-gray-400 text-center max-w-2xl">
+            A complete list of all frontend and fullstack technologies used in
+            my projects. Click any card to see the official documentation.
+          </p>
         </div>
         <div className="flex flex-wrap justify-center gap-5 mt-4 sm:grid sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 sm:items-center sm:justify-center">
           {allTechs.map((tech, idx) => {
@@ -52,8 +55,12 @@ export default function TechsPage() {
                 title={`Open ${tech.name} documentation`}
               >
                 <Icon className="text-4xl" style={{ color: tech.color }} />
-                <span className="group-hover:text-purple-400 transition-colors text-xs md:text-base font-bold tracking-wide text-center -mb-3 md:-mb-2 mt-1">{tech.name}</span>
-                <span className="text-[10px] md:text-xs text-gray-400 group-hover:text-purple-300 transition-colors text-center">{tech.subtitle}</span>
+                <span className="group-hover:text-purple-400 transition-colors text-xs md:text-base font-bold tracking-wide text-center -mb-3 md:-mb-2 mt-1">
+                  {tech.name}
+                </span>
+                <span className="text-[10px] md:text-xs text-gray-400 group-hover:text-purple-300 transition-colors text-center">
+                  {tech.subtitle}
+                </span>
               </a>
             );
           })}
@@ -61,4 +68,4 @@ export default function TechsPage() {
       </div>
     </main>
   );
-} 
+}

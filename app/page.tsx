@@ -16,9 +16,9 @@ const MainPage = () => {
           <Hero />
         </SectionAnimation>
         
-        <SectionAnimation>
+        {/* <SectionAnimation>
           <Grid />
-        </SectionAnimation>
+        </SectionAnimation> */}
         
         <SectionAnimation>
           <ShowcaseSections />

@@ -181,7 +181,7 @@ export const Hero = () => {
           </div>
 
           {/* Vídeo */}
-          <div className="flex-1 flex justify-center md:justify-end order-2 md:order-2">
+          <div className="flex-1 flex justify-center md:justify-end order-2 md:order-2 opacity-95">
             <div
               ref={containerRef}
               className="w-full md:max-w-md aspect-[9/16] md:aspect-[3/4] h-[360px] md:h-[620px] md:w-[540px] overflow-hidden rounded-3xl border-2 border-[#0B0B14]/20 relative"
@@ -194,7 +194,7 @@ export const Hero = () => {
               <div className="relative w-full h-full">
                 <video
                   ref={videoRef}
-                  src="/u1.mp4"
+                  src="/u3.mp4"
                   playsInline
                   loop
                   preload="auto"
